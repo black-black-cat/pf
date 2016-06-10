@@ -67,11 +67,11 @@ gulp.task('html', ['styles', 'scripts'], () => {
 });
 
 gulp.task('jade',function(){
-  return gulp.src(['app/jade/**/*.jade'])
+  return gulp.src(['app/jade/*.jade'])
     .pipe($.sourcemaps.init())
     .pipe($.jade())
     .pipe($.sourcemaps.write())
-    .pipe(gulp.dest('.tmp'))
+    .pipe(gulp.dest('app'))
     .pipe(reload({stream: true}))
 });
 
@@ -116,14 +116,17 @@ gulp.task('serve', ['styles', 'scripts', 'fonts'], () => {
     server: {
       baseDir: ['.tmp', 'app'],
       routes: {
-        '/bower_components': 'bower_components'
+        '/bower_components': 'bower_components',
+        'styles': '.tmp/styles',
+        'scripts': '.tmp/scripts'
       }
     }
   });
 
   gulp.watch([
-    // 'app/*.html',
-    jadePath,
+    'app/*.html',
+    // jadePath,
+    '.tmp/styles/**/*.css',
     '.tmp/scripts/**/*.js',
     'app/images/**/*',
     '.tmp/fonts/**/*'

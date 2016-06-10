@@ -1,0 +1,30 @@
+mixin item(imgSrc, title, desc)
+  .col-md-4.col-sm-6.project-item
+    a.project-link(href="#" target="_blank" data-toggle="modal")
+      .project-hover
+        .project-hover-content
+          i.fa.fa-fire.fa-3x
+      img.img-responsive(src=imgSrc)
+    .project-caption
+      h4=title
+      p.text-muted=desc
+
+
+#project.project-wrap
+  .porject-overlay
+    .container
+      .row
+        .col-lg-12.text-conter
+          h2.project-title 最近开发的项目
+            h3
+    .container
+      .row
+        +item("http://img5.duitang.com/uploads/item/201209/19/20120919103931_dLMcC.thumb.700_0.jpeg", "placeholder", "Bootstrap and Angularjs")
+        +item("http://img5.duitang.com/uploads/item/201209/19/20120919103931_dLMcC.thumb.700_0.jpeg", "placeholder", "Bootstrap and Angularjs")
+        +item("http://img5.duitang.com/uploads/item/201209/19/20120919103931_dLMcC.thumb.700_0.jpeg", "placeholder", "Bootstrap and Angularjs")
+      .row
+        +item("http://img5.duitang.com/uploads/item/201209/19/20120919103931_dLMcC.thumb.700_0.jpeg", "placeholder", "Bootstrap and Angularjs")
+        +item("http://img5.duitang.com/uploads/item/201209/19/20120919103931_dLMcC.thumb.700_0.jpeg", "placeholder", "Bootstrap and Angularjs")
+        +item("http://img5.duitang.com/uploads/item/201209/19/20120919103931_dLMcC.thumb.700_0.jpeg", "placeholder", "Bootstrap and Angularjs")
+
+

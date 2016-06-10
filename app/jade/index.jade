@@ -5,12 +5,57 @@ html(lang='zh')
     meta(http-equiv="x-ua-compatible", content="ie=edge")
     meta(name="viewport" content="width=device-width, initial-scale=1")
     link(rel="apple-touch-icon" href="apple-touch-icon.png")
-    link(href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet")
-    link(href="http://cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet")
-    link(href="./stylesheet/main.css")
+    link(rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.css")
+    link(href="styles/main.css" rel="stylesheet")
+    script(src="/bower_components/modernizr/modernizr.js")
+    script(src="/bower_components/jquery/dist/jquery.js")
+    script(src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap.js")
+    script(src="scripts/main.js")
     title black-black-cat
   body
+    // nav
     nav#nav.navbar.navbar-inverse.navbar-fixed-top.pw-nav
       .container
         .navbar-header
           button.navbar-toggle(type="button", data-toggle="collapse" data-target="#navbar-collapse-1")
+            span.sr-only Toggle navigation
+            - var i = -1
+            while ++i < 3
+              span.icon-bar
+          a.navbar-brand(href="#home") black-black-cat
+        #navbar-collapse-1.collapse.navbar-collapse(aria-expanded="false")
+          ul.nav.navbar-nav.navbar-right
+            - var navs = {"#home": "主页","#about": "关于我","#project": "项目","#contact": "联系方式"}
+            each val, key in navs
+              li
+                a(href=key)=val
+
+    // #home
+    include ./navs/home.jade
+    block content
+
+    // #about
+    include ./navs/about.jade
+    block content
+
+    // #project
+    include ./navs/p.jade
+
+    // #contact
+    include ./navs/contact.jade
+
+    mixin footerItem(h, text)
+      li
+        a(href=h)=text
+    footer
+      .container
+        .row
+          .col-lg-12
+            .list-inline
+              +footerItem("#home", "主页")
+              li.footer-menu-divider
+              +footerItem("#about", "关于我")
+              li.footer-menu-divider
+              +footerItem("#project", "项目")
+              li.footer-menu-divider
+              +footerItem("#contact", "联系方式")
