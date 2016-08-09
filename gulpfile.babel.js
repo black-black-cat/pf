@@ -57,7 +57,7 @@ gulp.task('html', ['styles', 'scripts'], () => {
     .pipe($.sourcemaps.init())
     .pipe($.jade())
     .pipe($.htmlmin())
-    .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
+    .pipe($.useref({searchPath: ['app']}))
     .pipe($.if('*.js', $.uglify()))
     .pipe($.if('*.css', $.cssnano()))
     .pipe($.if('*.html', $.htmlmin({collapseWhitespace: true})))
@@ -71,7 +71,7 @@ gulp.task('jade',function(){
     .pipe($.sourcemaps.init())
     .pipe($.jade())
     .pipe($.sourcemaps.write())
-    .pipe(gulp.dest('app'))
+    .pipe(gulp.dest('.tmp'))
     .pipe(reload({stream: true}))
 });
 
@@ -126,7 +126,7 @@ gulp.task('serve', ['styles', 'scripts', 'fonts'], () => {
   });
 
   gulp.watch([
-    'app/*.html',
+    '.tmp/*.html',
     // jadePath,
     '.tmp/styles/**/*.css',
     '.tmp/scripts/**/*.js',
@@ -196,3 +196,18 @@ gulp.task('build', ['lint', 'html', 'images', 'fonts', 'extras'], () => {
 gulp.task('default', ['clean'], () => {
   gulp.start('build');
 });
+
+gulp.task('copy_js', () => {
+  return gulp.src([
+    './node_modules/jquery/dist/jquery.js',
+    './node_modules/bootstrap-sass/assets/javascripts/bootstrap.js'
+  ]).pipe(gulp.dest('app/scripts/'))
+})
+
+gulp.task('copy_css', () => {
+  return gulp.src([
+    './node_modules/font-awesome/css/font-awesome.css'
+  ]).pipe(gulp.dest('app/styles/'))
+})
+
+gulp.task('copy', ['copy_js', 'copy_css'])
